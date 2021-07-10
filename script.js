@@ -38,3 +38,19 @@ btnScrollTo.addEventListener('click',function(e){
   // MODERN SMOOTH SCROLL
   section1.scrollIntoView({behavior:'smooth'})
 })
+
+// COOKIE--MESSAGE
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+message.innerHTML='We use cookies for better experience<button class="btn btn--close-cookie">Got it </button> '
+const header = document.querySelector('.header');
+
+// Changing styles
+message.style.backgroundColor='#37383d'
+message.style.width='120%'
+header.append(message)
+message.style.height=Number.parseFloat(getComputedStyle(message).height,10)+20+'px' 
+//deleting elements
+document.querySelector('.btn--close-cookie').addEventListener('click',function(){
+  message.remove();
+})
