@@ -39,6 +39,15 @@ btnScrollTo.addEventListener('click',function(e){
   section1.scrollIntoView({behavior:'smooth'})
 })
 
+// Smooth Scroll in navigation bar
+document.querySelector('.nav__links').addEventListener('click',function(e){
+  e.preventDefault()
+  if(e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href')
+    document.querySelector(id).scrollIntoView({behavior :'smooth'})
+  }
+})
+
 // COOKIE--MESSAGE
 const message = document.createElement('div');
 message.classList.add('cookie-message');
@@ -54,3 +63,4 @@ message.style.height=Number.parseFloat(getComputedStyle(message).height,10)+20+'
 document.querySelector('.btn--close-cookie').addEventListener('click',function(){
   message.remove();
 })
+
