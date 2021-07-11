@@ -107,7 +107,6 @@ nav.addEventListener('mouseout',handleHover.bind(1))
 
 
 // STCKY-NAVIGATION BAR
-const header =document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function(entires){
