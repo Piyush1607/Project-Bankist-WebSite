@@ -141,3 +141,74 @@ allSections.forEach(function(section){
   sectionObsever.observe(section);
   section.classList.add('section--hidden')
 })
+
+
+//-------------------------SLIDER-COMPONENT--------------------------------
+const slides = document.querySelectorAll('.slide');
+const slider =document.querySelector('.slider');
+const btnLeft=document.querySelector('.slider__btn--left');
+const btnRight=document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
+
+
+//UTILITY FUNCTIONS
+const activateButton=function(slide){
+  document.querySelectorAll('.dots__dot').forEach(dot=>dot.classList.remove('dots__dot--active'));
+  document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
+}
+const createDots = function(){
+  slides.forEach((_,i)=>{
+    dotContainer.insertAdjacentHTML('beforeend',`<button class="dots__dot" data-slide=${i}>
+    </button>`)
+  })
+}
+//creating dots
+createDots()
+// activating first button
+activateButton(0)
+//slide number
+let currentSlide =0
+//total slides
+const maxSlides = slides.length
+// got to slide function
+const goToSlide=function(slide){
+  slides.forEach((s,i)=>s.style.transform=`translateX(${100*(i-slide)}%)`)
+}
+// translating slides in the beginning
+goToSlide(0) 
+//Next slide
+const nextSlide =function(){
+  if(currentSlide===maxSlides-1) currentSlide=0 
+  else currentSlide++;
+  goToSlide(currentSlide)
+  activateButton(currentSlide)
+}
+
+//previous slide
+const prevSlide=function(){
+  if(currentSlide===0) currentSlide=maxSlides-1 
+  else currentSlide--;
+  goToSlide(currentSlide)
+  activateButton(currentSlide)
+}
+// adding eventHandler to buttons
+btnRight.addEventListener('click',nextSlide)
+btnLeft.addEventListener('click',prevSlide)
+
+
+// CHANGING SLIDES WITH KEYBOARD
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight') nextSlide()
+  if(e.key==='ArrowLeft') prevSlide()
+})
+
+// SLIDE USING DOTS
+// Activate button
+
+dotContainer.addEventListener('click',function(e){
+  if(!e.target.classList.contains('dots__dot')) return;
+  const {slide} = e.target.dataset
+  goToSlide(e.target.dataset.slide)
+  activateButton(e.target.dataset.slide)
+})
+
