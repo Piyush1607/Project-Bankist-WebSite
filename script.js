@@ -82,7 +82,6 @@ tabContainer.addEventListener('click',function(e){
   // ACTIVATE TAB CONTENT
 
   tabsContent.forEach(t=>t.classList.remove('operations__content--active'))
-  console.log(clicked.dataset.tab);
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active')
 })
 
@@ -120,7 +119,7 @@ const stickyNav = function(entires){
 const headerObserver = new IntersectionObserver(stickyNav,{
   root :null,
   threshold :0 ,
-  rootMargin :  `-${navHeight}px` 
+  rootMargin :`-${navHeight}px` 
 });
 
 headerObserver.observe(header)
